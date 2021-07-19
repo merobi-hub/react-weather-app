@@ -94,11 +94,11 @@ export const Main = () => {
     
         var regex = /^[a-z A-Z]+$/;
         if(!loc.match(regex)){
-            let response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${loc},us&appid=${apiKey}`)
+            let response = await axios.get(`//api.openweathermap.org/data/2.5/weather?zip=${loc},us&appid=${apiKey}`)
             console.log(response.data)
             return loadData(response.data)
         } else {
-            let response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${apiKey}`)
+            let response = await axios.get(`//api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${apiKey}`)
             console.log(response.data)
             return loadData(response.data)
         }
@@ -118,6 +118,7 @@ export const Main = () => {
             <head>
                 <meta charSet="UTF-8"/>
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
+                <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
                 <title>Weather Data</title>
