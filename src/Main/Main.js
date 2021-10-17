@@ -10,12 +10,12 @@ export const Main = () => {
 
         // convert temps from K to F and round to nearest whole number
     
-        var tempF = ((`${apiData.main.temp}` - 273.15) * 9/5 + 32).toFixed() 
-        var highF = ((`${apiData.main.temp_max}` - 273.15) * 9/5 + 32).toFixed() 
-        var lowF = ((`${apiData.main.temp_min}` - 273.15) * 9/5 + 32).toFixed() 
-        var feelsF = ((`${apiData.main.feels_like}` - 273.15) * 9/5 + 32).toFixed() 
+        var tempF = ((`${apiData.main.temp}` - 273.15) * 9/5 + 32).toFixed(); 
+        var highF = ((`${apiData.main.temp_max}` - 273.15) * 9/5 + 32).toFixed(); 
+        var lowF = ((`${apiData.main.temp_min}` - 273.15) * 9/5 + 32).toFixed(); 
+        var feelsF = ((`${apiData.main.feels_like}` - 273.15) * 9/5 + 32).toFixed(); 
     
-        console.log(tempF, highF, lowF, feelsF)
+        console.log(tempF, highF, lowF, feelsF);
     
         // collect data in array
     
@@ -28,65 +28,66 @@ export const Main = () => {
             "humidity": `${apiData.main.humidity}`,
             "pressure": `${apiData.main.pressure}`,
             "weather": `${apiData.weather[0].description}`
-        }
+        };
     
-        console.log(weatherData)
+        console.log(weatherData);
     
-        return createTables(weatherData)
+        return createTables(weatherData);
     }
     
     // Populate tables in index.html with data, adjusting text color based on temp
     
     const createTables = (data) => {
     
-        var city = document.querySelector(".city")
-        city.innerHTML = `${data["name"]}`
+        var city = document.querySelector(".city");
+        city.innerHTML = `${data["name"]}`;
     
-        var temp = document.querySelector(".temp td")
+        var temp = document.querySelector(".temp td");
         if (data["temp"] >= 85){
-            temp.innerHTML = `<span style="color:red;">${data["temp"]}&#176;F</span>`
+            temp.innerHTML = `<span style="color:red;">${data["temp"]}&#176;F</span>`;
         } else if (data["temp"] >= 50){
-            temp.innerHTML = `<span>${data["temp"]}&#176;F</span>`
+            temp.innerHTML = `<span>${data["temp"]}&#176;F</span>`;
         } else if (data["temp"] < 50){
-            temp.innerHTML = `<span style="color:blue;">${data["temp"]}&#176;F</span>`
+            temp.innerHTML = `<span style="color:blue;">${data["temp"]}&#176;F</span>`;
         }
     
-        var high = document.querySelector(".high td")
+        var high = document.querySelector(".high td");
         if (data["high"] >= 85){
-            high.innerHTML = `<span style="color:red;">${data["high"]}&#176;F</span>`
+            high.innerHTML = `<span style="color:red;">${data["high"]}&#176;F</span>`;
         } else if (data["high"] >= 50){
-            high.innerHTML = `<span>${data["high"]}&#176;F</span>`
+            high.innerHTML = `<span>${data["high"]}&#176;F</span>`;
         } else if (data["high"] < 50){
-            high.innerHTML = `<span style="color:blue;">${data["high"]}&#176;F</span>`
+            high.innerHTML = `<span style="color:blue;">${data["high"]}&#176;F</span>`;
         }
     
-        var low = document.querySelector(".low td")
+        var low = document.querySelector(".low td");
         if (data["low"] >= 85){
-            low.innerHTML = `<span style="color:red;">${data["low"]}&#176;F</span>`
+            low.innerHTML = `<span style="color:red;">${data["low"]}&#176;F</span>`;
         } else if (data["low"] >= 50){
-            low.innerHTML = `<span>${data["low"]}&#176;F</span>`
+            low.innerHTML = `<span>${data["low"]}&#176;F</span>`;
         } else if (data["low"] < 50){
-            low.innerHTML = `<span style="color:blue;">${data["low"]}&#176;F</span>`
+            low.innerHTML = `<span style="color:blue;">${data["low"]}&#176;F</span>`;
         }
     
-        var feels = document.querySelector(".feels-like td")
+        var feels = document.querySelector(".feels-like td");
         if (data["feelsLike"] >= 80){
-            feels.innerHTML = `<span style="color:red;">${data["feelsLike"]}&#176;F</span>`
+            feels.innerHTML = `<span style="color:red;">${data["feelsLike"]}&#176;F</span>`;
         } else if (data["feelsLike"] >= 50){
-            feels.innerHTML = `<span>${data["feelsLike"]}&#176;F</span>`
+            feels.innerHTML = `<span>${data["feelsLike"]}&#176;F</span>`;
         } else if (data["feelsLike"] < 50){
-            feels.innerHTML = `<span style="color:blue;">${data["feelsLike"]}&#176;F</span>`
+            feels.innerHTML = `<span style="color:blue;">${data["feelsLike"]}&#176;F</span>`;
         }
     
-        var humidity = document.querySelector(".humidity td")
-        humidity.innerHTML = `${data["humidity"]}<span>&#x25;</span>`
+        var humidity = document.querySelector(".humidity td");
+        humidity.innerHTML = `${data["humidity"]}<span>&#x25;</span>`;
     
-        var pressure = document.querySelector(".pressure td")
-        pressure.innerHTML = `${data["pressure"]} inHg.`
+        var pressure = document.querySelector(".pressure td");
+        pressure.innerHTML = `${data["pressure"]} inHg.`;
     
-        var weather = document.querySelector(".weather td")
-        weather.innerHTML = `${data["weather"]}`
-    }
+        var weather = document.querySelector(".weather td");
+        weather.innerHTML = `${data["weather"]}`;
+
+    };
 
     const apiData = async (loc) => {
 
@@ -94,13 +95,13 @@ export const Main = () => {
     
         var regex = /^[a-z A-Z]+$/;
         if(!loc.match(regex)){
-            let response = await axios.get(`//api.openweathermap.org/data/2.5/weather?zip=${loc},us&appid=${apiKey}`)
-            console.log(response.data)
-            return loadData(response.data)
+            let response = await axios.get(`//api.openweathermap.org/data/2.5/weather?zip=${loc},us&appid=${apiKey}`);
+            console.log(response.data);
+            return loadData(response.data);
         } else {
-            let response = await axios.get(`//api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${apiKey}`)
-            console.log(response.data)
-            return loadData(response.data)
+            let response = await axios.get(`//api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${apiKey}`);
+            console.log(response.data);
+            return loadData(response.data);
         }
     }
 
@@ -110,7 +111,7 @@ export const Main = () => {
         console.log(`Location: ${loc}`);
         apiData(loc);
         event.preventDefault();
-    }
+    };
 
     return (
 
@@ -120,7 +121,7 @@ export const Main = () => {
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                 <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-                <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
                 <title>Weather Data</title>
             </head>
 
